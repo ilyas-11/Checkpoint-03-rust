@@ -10,31 +10,13 @@ impl Matrix {
         )
     }
 }
-
 impl fmt::Display for Matrix {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        for (r,row) in self.0.iter().enumerate() {
-
-            write!(f,"(")?;
-
-            for (i,value) in row.iter().enumerate() {
-
-                if i>0{
-                    write!(f," ")?;
-                }
-
-                write!(f,"{}",value)?;
-            }
-
-            write!(f,")")?;
-            write!(f,"{}",r)?;
-
-            if r+1!=self.0.len(){
-                writeln!(f)?;
-            }
-        }
-
-        Ok(())
+       for r in &self.0{
+        let line = r.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(" ");
+        writeln!(f,"({})",line)?;
+       }
+       Ok(())
     }
 
 }
