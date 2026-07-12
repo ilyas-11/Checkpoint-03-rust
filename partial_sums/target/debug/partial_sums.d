@@ -1,0 +1,1 @@
+/home/iabid/Desktop/Checkpoint-03-rust/partial_sums/target/debug/partial_sums: /home/iabid/Desktop/Checkpoint-03-rust/partial_sums/src/lib.rs /home/iabid/Desktop/Checkpoint-03-rust/partial_sums/src/main.rs
