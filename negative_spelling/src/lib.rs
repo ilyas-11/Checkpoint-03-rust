@@ -1,65 +1,61 @@
 pub fn negative_spell(n: i64) -> String {
-    println!("*******{}",n);
-    if n > 0 {
+    if n >= 0 {
         return "error: positive number".to_string();
     }
-    if n==0{
-        return "zero".to_string();
-    }else if n==-14{
-        return "minus fourteen".to_string();
 
-    }else if n==-20{
-        return "minus twenty".to_string();
-        
-    }else if n==-1{
-        return "minus one".to_string();
-        
-    }else if n==-22{
-        return "minus twenty-two".to_string();
-        
-    }else if n==-101{
-        return "minus one hundred one".to_string();
-        
-    }else if n==-120{
-        return "minus one hundred twenty".to_string();
-        
-    }else if n==-1000{
-        return "minus one thousand".to_string();
-    }else if n==-910112{
-        return "minus nine hundred ten thousand one hundred twelve".to_string();
-        
-    }else if n==-10123{
-        return "minus ten thousand one hundred twenty-three".to_string();
-        
-    }else if n==-651123{
-        return "minus six hundred fifty-one thousand one hundred twenty-three".to_string();
-        
-    }else if n==-1055{
-        return "minus one thousand fifty-five".to_string();
-        
-    }else if n==-651123{
-        return "minus six hundred fifty-one thousand one hundred twenty-three".to_string();
-        
-    }else if n==-1234{
-        return "minus one thousand two hundred thirty-four".to_string();
-        
-    }else if n==-910112{
-        return "minus eight hundred ten thousand".to_string();
-        
-    }else if n==-810000{
-        return "minus eight hundred ten thousand".to_string();
-        
-    }else if n==-1000000{
-        return "minus one million".to_string();
-        
-    }else if n==-123{
-        return "minus one hundred twenty-three".to_string();
-        
+    format!("minus {}", spell((-n) as u64))
+}
+
+fn spell(n: u64) -> String {
+    let small = [
+        "", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen",
+    ];
+
+    let tens = [
+        "", "", "twenty", "thirty", "forty", "fifty",
+        "sixty", "seventy", "eighty", "ninety",
+    ];
+
+    match n {
+        0..=19 => small[n as usize].to_string(),
+
+        20..=99 => {
+            let t = n / 10;
+            let u = n % 10;
+
+            if u == 0 {
+                tens[t as usize].to_string()
+            } else {
+                format!("{}-{}", tens[t as usize], small[u as usize])
+            }
+        }
+
+        100..=999 => {
+            let h = n / 100;
+            let r = n % 100;
+
+            if r == 0 {
+                format!("{} hundred", spell(h))
+            } else {
+                format!("{} hundred {}", spell(h), spell(r))
+            }
+        }
+
+        1000..=999_999 => {
+            let th = n / 1000;
+            let r = n % 1000;
+
+            if r == 0 {
+                format!("{} thousand", spell(th))
+            } else {
+                format!("{} thousand {}", spell(th), spell(r))
+            }
+        }
+
+        1_000_000 => "one million".to_string(),
+
+        _ => String::new(),
     }
-    else if n==-1234{
-        return "".to_string();
-        
-    }
-    "zero".to_string()
-    
 }
